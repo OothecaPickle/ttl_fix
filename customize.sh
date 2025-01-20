@@ -21,6 +21,9 @@ cd /data/local/tmp/ttl_fix
 
 dd if="$BOOTIMG" of="/data/local/tmp/ttl_fix/boot.img" conv=notrunc
 $MAGISKBOOT unpack -h "/data/local/tmp/ttl_fix/boot.img"
+# replaces an STRB & an STRH with NOPs
+# https://armconverter.com/?disasm&code=C9220039+C8160079
+# https://armconverter.com/?disasm&code=1F2003D5+1F2003D5
 ( $MAGISKBOOT hexpatch kernel C9220039C816007968F24039E8002836 1F2003D51F2003D568F24039E8002836 || # Redmi Note 10 pro
 $MAGISKBOOT hexpatch kernel A0160079A022403900040051A0220039 1F2003D5A0224039000400511F2003D5 || # REVVL 6 Pro
 $MAGISKBOOT hexpatch kernel 08050011C9220039C8160079687A4079 080500111F2003D51F2003D5687A4079 || # pixel6a
